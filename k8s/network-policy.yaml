@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: david-vizena-network-policy
+  namespace: david-vizena
+  labels:
+    app: david-vizena-app
+spec:
+  podSelector:
+    matchLabels:
+      app: david-vizena-app
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector: {}
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - {} # Allow all egress traffic
