@@ -36,17 +36,12 @@ echo "☸️  Creating EKS cluster..."
 eksctl create cluster \
     --name $CLUSTER_NAME \
     --region $REGION \
-    --version 1.26 \
     --nodegroup-name $NODE_GROUP_NAME \
-    --node-type t3.micro \
-    --nodes 2 \
-    --nodes-min 1 \
-    --nodes-max 3 \
+    --node-type t3.small \
+    --nodes 1 \
     --managed \
-    --with-oidc \
     --ssh-access \
-    --ssh-public-key ~/.ssh/id_rsa.pub \
-    --full-ecr-access
+    --ssh-public-key ~/.ssh/id_rsa.pub
 
 echo "✅ EKS cluster created successfully!"
 
