@@ -30,7 +30,7 @@ A comprehensive monitoring and observability solution showcasing David Vizena's 
 - **Alerting**: AlertManager, Slack/Email notifications
 - **Logging**: ELK Stack (Elasticsearch, Logstash, Kibana)
 
-## 📦 Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -38,6 +38,32 @@ A comprehensive monitoring and observability solution showcasing David Vizena's 
 - Docker
 - Kubernetes cluster (local or cloud)
 - kubectl configured
+- Make (optional, for automation)
+
+### One-Command Demo Setup
+
+```bash
+make demo
+```
+
+This will:
+1. Start minikube cluster
+2. Deploy monitoring stack
+3. Setup port forwarding
+4. Provide access URLs
+
+### Manual Setup
+
+```bash
+# Start minikube
+minikube start
+
+# Deploy monitoring stack
+make deploy-monitoring
+
+# Setup port forwarding
+make port-forward
+```
 
 ### Local Development
 
@@ -111,20 +137,25 @@ A comprehensive monitoring and observability solution showcasing David Vizena's 
 ## 📁 Project Structure
 
 ```
-├── src/
-│   ├── App.js          # Main React component
-│   ├── index.js        # React entry point
-│   └── index.css       # Tailwind CSS imports
-├── public/
-│   └── index.html      # HTML template
-├── k8s/
-│   ├── namespace.yaml  # Kubernetes namespace
-│   ├── deployment.yaml # App deployment
-│   ├── service.yaml    # LoadBalancer service
-│   └── network-policy.yaml # Network policies
-├── Dockerfile          # Multi-stage Docker build
-├── nginx.conf          # Nginx configuration
-└── deploy.sh           # Deployment script
+├── infrastructure/
+│   ├── aws/                    # AWS EKS configurations
+│   └── kubernetes/
+│       ├── base/               # Core application manifests
+│       ├── monitoring/         # Monitoring stack manifests
+│       └── ingress/            # Ingress configurations
+├── configs/
+│   ├── grafana/                # Grafana dashboards and configs
+│   └── prometheus/             # Prometheus configurations
+├── scripts/
+│   ├── deployment/             # Deployment automation
+│   └── monitoring/             # Monitoring setup scripts
+├── docs/
+│   ├── architecture/           # Architecture documentation
+│   └── deployment/             # Deployment guides
+├── src/                        # React application source
+├── Makefile                    # Professional automation
+├── docker-compose.yml          # Local development stack
+└── Dockerfile                  # Multi-stage Docker build
 ```
 
 ## 🔧 Configuration
