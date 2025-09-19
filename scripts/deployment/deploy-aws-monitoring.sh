@@ -53,7 +53,7 @@ kubectl apply -f infrastructure/kubernetes/monitoring/grafana-service.yaml
 
 # Deploy Ingress for web access
 echo "🌐 Deploying Ingress for web access..."
-kubectl apply -f infrastructure/kubernetes/monitoring/ingress.yaml
+kubectl apply -f infrastructure/kubernetes/ingress/aws-ingress.yaml
 
 # Wait for deployments to be ready
 echo "⏳ Waiting for deployments to be ready..."

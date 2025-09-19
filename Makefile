@@ -90,3 +90,23 @@ docs: ## Generate documentation
 # Quick start for employers
 demo: setup-minikube deploy-monitoring port-forward ## Quick demo setup
 	@echo "Demo ready! Access Grafana at http://localhost:3000"
+
+demo-aws: deploy-aws-monitoring port-forward ## AWS demo setup
+	@echo "AWS Demo ready! Access Grafana at http://localhost:3000"
+
+# Domain and public access
+setup-domain: ## Setup custom domain for public access
+	./scripts/monitoring/setup-domain.sh
+
+setup-ngrok: ## Setup ngrok for immediate public access
+	./scripts/monitoring/setup-ngrok.sh
+
+# Status and cleanup
+status: ## Check deployment status
+	./scripts/monitoring/check-status.sh
+
+cleanup: ## Cleanup and status check
+	./scripts/monitoring/cleanup-and-status.sh
+
+get-urls: ## Get all access URLs
+	./scripts/monitoring/get-access-urls.sh
