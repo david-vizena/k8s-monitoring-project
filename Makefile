@@ -24,14 +24,27 @@ setup-minikube: ## Setup local minikube cluster
 	minikube addons enable ingress
 
 setup-aws: ## Setup AWS EKS cluster
-	./infrastructure/aws/aws-setup.sh
+	./infrastructure/aws/eks-simple-setup.sh
+
+setup-aws-ingress: ## Install AWS Load Balancer Controller
+	kubectl apply -k "https://github.com/aws/eks-charts/stable/aws-load-balancer-controller/crds?ref=master"
+	helm repo add eks https://aws.github.io/eks-charts
+	helm repo update eks
+	helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+		-n kube-system \
+		--set clusterName=david-vizena-monitoring-v2 \
+		--set serviceAccount.create=false \
+		--set region=us-east-1
 
 # Deployment targets
 deploy-app: ## Deploy main application
 	./scripts/deployment/deploy.sh
 
-deploy-monitoring: ## Deploy monitoring stack
+deploy-monitoring: ## Deploy monitoring stack to minikube
 	./scripts/deployment/deploy-monitoring.sh
+
+deploy-aws-monitoring: ## Deploy monitoring stack to AWS EKS
+	./scripts/deployment/deploy-aws-monitoring.sh
 
 deploy-all: deploy-app deploy-monitoring ## Deploy everything
 
@@ -62,7 +75,7 @@ clean: ## Clean up all resources
 	kubectl delete namespace david-vizena --ignore-not-found=true
 
 clean-aws: ## Clean up AWS resources
-	eksctl delete cluster --region=us-east-1 --name=david-vizena-monitoring
+	eksctl delete cluster --region=us-east-1 --name=david-vizena-monitoring-v2
 
 # Utility targets
 lint: ## Run linting

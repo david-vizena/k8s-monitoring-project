@@ -33,7 +33,7 @@ kubectl port-forward -n monitoring svc/prometheus 9090:9090
 
 ### 1. Setup AWS Infrastructure
 ```bash
-./infrastructure/aws/aws-setup.sh
+./infrastructure/aws/eks-simple-setup.sh
 ```
 
 ### 2. Deploy Application

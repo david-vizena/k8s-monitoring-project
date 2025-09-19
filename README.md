@@ -38,9 +38,13 @@ A comprehensive monitoring and observability solution showcasing David Vizena's 
 - Docker
 - Kubernetes cluster (local or cloud)
 - kubectl configured
+- AWS CLI (for cloud deployment)
+- eksctl (for AWS EKS)
 - Make (optional, for automation)
 
-### One-Command Demo Setup
+### Local Development (Minikube)
+
+#### One-Command Demo Setup
 
 ```bash
 make demo
@@ -52,7 +56,7 @@ This will:
 3. Setup port forwarding
 4. Provide access URLs
 
-### Manual Setup
+#### Manual Setup
 
 ```bash
 # Start minikube
@@ -63,6 +67,32 @@ make deploy-monitoring
 
 # Setup port forwarding
 make port-forward
+```
+
+### AWS EKS Deployment
+
+#### Setup AWS EKS Cluster
+
+```bash
+# Create EKS cluster
+make setup-aws
+
+# Install AWS Load Balancer Controller
+make setup-aws-ingress
+
+# Deploy monitoring stack to AWS
+make deploy-aws-monitoring
+```
+
+#### Access AWS Deployment
+
+```bash
+# Get LoadBalancer URL
+kubectl get ingress -n monitoring
+
+# Access services
+# Grafana: http://<LOAD_BALANCER_IP>/grafana
+# Prometheus: http://<LOAD_BALANCER_IP>/prometheus
 ```
 
 ### Local Development
@@ -182,8 +212,9 @@ This is **Project 2** of a 4-project portfolio series demonstrating full-stack D
 ### **Project 2: Monitoring & Observability** (Current)
 - ✅ Grafana Dashboards
 - ✅ Prometheus Metrics
-- ✅ Alerting & Incident Response
-- ✅ Log Aggregation
+- ✅ Kubernetes Monitoring Stack
+- ✅ AWS EKS Deployment Ready
+- ✅ Professional Project Structure
 
 ### **Project 3: CI/CD & GitOps** (Coming Soon)
 - 🔄 GitHub Actions

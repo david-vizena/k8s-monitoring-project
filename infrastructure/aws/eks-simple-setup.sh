@@ -22,7 +22,7 @@ fi
 
 # Set variables
 CLUSTER_NAME="david-vizena-monitoring-v2"
-REGION="us-west-2"
+REGION="us-east-1"
 
 echo "📋 Configuration:"
 echo "  Cluster Name: $CLUSTER_NAME"
@@ -38,23 +38,8 @@ eksctl create cluster \
     --name $CLUSTER_NAME \
     --region $REGION \
     --nodegroup-name workers \
-    --node-type t3.medium \
+    --node-type t3.small \
     --nodes 1 \
-    --managed \
-    --ssh-access \
-    --ssh-public-key ~/.ssh/id_rsa.pub \
-    --without-nodegroup
-
-echo "✅ EKS cluster created successfully!"
-
-# Create node group separately
-echo "👥 Creating node group..."
-eksctl create nodegroup \
-    --cluster=$CLUSTER_NAME \
-    --region=$REGION \
-    --name=workers \
-    --node-type=t3.medium \
-    --nodes=1 \
     --managed
 
 echo "✅ Node group created successfully!"

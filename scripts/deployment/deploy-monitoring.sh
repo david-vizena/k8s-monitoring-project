@@ -10,7 +10,7 @@ echo "🚀 Deploying monitoring stack to AWS EKS..."
 # Check if kubectl is configured
 if ! kubectl cluster-info &> /dev/null; then
     echo "❌ kubectl is not configured or cluster is not accessible."
-    echo "Please run aws-setup.sh first or configure kubectl manually."
+    echo "Please run eks-simple-setup.sh first or configure kubectl manually."
     exit 1
 fi
 
